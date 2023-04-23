@@ -11,6 +11,10 @@ const appRoutes = [
     component: <Home />,
   },
   {
+    path: ":categoryId",
+    component: <Home />,
+  },
+  {
     path: "mylist",
     component: <Cart />,
   },

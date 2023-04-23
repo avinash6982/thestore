@@ -1,9 +1,11 @@
 import React from "react";
 import queryClient from "../../QueryClient";
+import { useSearchParams } from "react-router-dom";
 
 const CategoriesList = () => {
   const { data, status } = queryClient.getQueryState("categories");
-  const activeItem = "electronics";
+  const [searchParams, setSearchParams] = useSearchParams();
+  const activeItem = searchParams.get("category");
 
   return (
     <div className="overflow-y-auto shadow-md bg-white bg-opacity-90 rounded p-2 flex-1 grid place-items-center">
@@ -11,6 +13,7 @@ const CategoriesList = () => {
         {status === "success" ? (
           data?.data.map((item, key) => (
             <li
+              onClick={() => setSearchParams({ category: item })}
               className={`text-gray-500 hover:text-black cursor-pointer ${
                 item === activeItem && "text-indigo-500"
               }`}
