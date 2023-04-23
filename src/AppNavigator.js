@@ -2,21 +2,12 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./screens/Home";
-import Cart from "./screens/Cart";
 import PageNotFound from "./screens/PageNotFound";
 
 const appRoutes = [
   {
     path: "/",
     component: <Home />,
-  },
-  {
-    path: ":categoryId",
-    component: <Home />,
-  },
-  {
-    path: "mylist",
-    component: <Cart />,
   },
 ];
 

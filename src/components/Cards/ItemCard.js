@@ -1,79 +1,54 @@
 import React from "react";
-import { AiFillStar } from "react-icons/ai";
-import { BsPlus, BsCheck, BsX } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
-import { addToCart, removeFromCart } from "../../redux/cart";
-
-//MovieCard being used at all pages
-const ItemCard = ({ isListScreen, ...props }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  // itemIds is the array of ids of movies which are already added to watchlist
-  const { itemIds } = useSelector((state) => state.cart);
-
+const ItemCard = ({
+  id,
+  title,
+  price,
+  description,
+  image,
+  rating,
+  category,
+}) => {
   return (
-    <div className="rounded overflow-hidden shadow-lg flex flex-row relative">
-      {/* If id of the movie is already there in myList provide option to remove it from list */}
-      {itemIds.includes(props.id) ? (
-        <div
-          onClick={() => dispatch(removeFromCart(props.id))}
-          className="absolute bg-white bg-opacity-60 hover:bg-opacity-80 rounded left-2 bottom-2 p-1"
-        >
-          {/* if list screen is showing currently, display BsX instead of BsCheck */}
-          {isListScreen ? (
-            <BsX color="#8C1F08" size={30} />
-          ) : (
-            <BsCheck color="#8C1F08" size={30} />
-          )}
-        </div>
-      ) : (
-        <div
-          onClick={() => dispatch(addToCart(props))}
-          className="absolute bg-white bg-opacity-60 hover:bg-opacity-80 rounded left-2 bottom-2 p-1"
-        >
-          <BsPlus color="#8C1F08" size={30} />
-        </div>
-      )}
-
-      {/* Clicking image takes to movie page */}
+    <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
       <img
-        onClick={() => navigate(`/movie/${props.id}`)}
-        data-testid="thumb-image"
-        className="w-1/2"
-        // src={
-        //   props.poster_path
-        //     ? getFullImageUrl(props.poster_path)
-        //     : "https://placehold.jp/3d4070/ffffff/400x600.png?text=No%20image"
-        // }
-        alt="Sunset in the mountains"
+        className="h-32 pt-2 mx-auto rounded-t-lg"
+        src={image}
+        alt="product image"
       />
-      {/* Clicking on details section takes to movie page */}
-      <div onClick={() => navigate(`/movie/${props.id}`)} className="p-4">
-        <div>
-          <div className="font-bold text-sm mb-2 line-clamp-2">
-            {props.title}
-          </div>
-          <p className="text-gray-700 text-xs line-clamp-4">{props.overview}</p>
-        </div>
-
-        {/* Original language */}
-        <div className="pt-2">
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-xs font-semibold text-gray-700 mr-2 mb-2">
-            Lang: {props.original_language}
+      <div className="px-5 pb-5 pt-2">
+        <h6 className="text-md font-semibold tracking-tight text-gray-900 line-clamp-1">
+          {title}
+        </h6>
+        <p className="text-sm tracking-tight text-gray-900 line-clamp-3">
+          {description}
+        </p>
+        <div className="flex items-center mt-2.5 mb-5">
+          {new Array(Math.floor(rating.rate)).fill("0").map((item, index) => (
+            <svg
+              key={index}
+              aria-hidden="true"
+              className="w-5 h-5 text-yellow-300"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+            </svg>
+          ))}
+          <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded ml-3">
+            {rating.rate}
+            {` `}({rating.count})
           </span>
         </div>
-
-        {/* Popularity */}
-        <div className="pt-2 basis-1/5 flex flex-row">
-          <AiFillStar color="gold" />
-          <div className="text-xs">{props.popularity}</div>
-        </div>
-        {/* Release date */}
-        <div className="pt-2 basis-1/5 flex flex-row text-xs">
-          {props.release_date}
+        <div className="flex items-center justify-between">
+          <span className="text-md font-bold text-gray-900">${price}</span>
+          <a
+            href="#"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+          >
+            Add to cart
+          </a>
         </div>
       </div>
     </div>

@@ -1,9 +1,10 @@
+import { useQuery } from "react-query";
+
 import Navbar from "./components/Navbar";
 import AppBackground from "./components/Background/AppBackground";
 import AppNavigator from "./AppNavigator";
 import CategoriesList from "./components/CategoriesList";
-import { useQuery } from "react-query";
-
+import Cart from "./components/Cart";
 import { getRequest } from "./api/requests";
 import { API } from "./api/endpoints";
 
@@ -14,7 +15,7 @@ export default function App() {
       <AppBackground />
       <Navbar />
       <div className="flex-1 flex flex-col sm:flex-row">
-        <main className="flex-1 bg-indigo-100 bg-opacity-20">
+        <main className="flex-1 p-3">
           <AppNavigator />
         </main>
 
@@ -22,7 +23,9 @@ export default function App() {
           <CategoriesList />
         </nav>
 
-        <aside className="sm:w-64">Right Sidebar</aside>
+        <aside className="sm:w-64 p-3 flex">
+          <Cart />
+        </aside>
       </div>
     </div>
   );
