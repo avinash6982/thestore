@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { addToCart, removeFromCart } from "../../redux/cart";
 
 //MovieCard being used at all pages
-const MovieCard = ({ isListScreen, ...props }) => {
+const ItemCard = ({ isListScreen, ...props }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -80,4 +80,4 @@ const MovieCard = ({ isListScreen, ...props }) => {
   );
 };
 
-export default MovieCard;
+export default ItemCard;

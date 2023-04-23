@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { items } = useSelector((state) => state.myList);
+  const { items } = useSelector((state) => state.cart);
 
   const generatePathTitle = () =>
     location.pathname === "/"

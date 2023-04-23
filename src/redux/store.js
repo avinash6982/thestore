@@ -11,12 +11,10 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import categoriesReducer from "./categories";
 import cartReducer from "./cart";
 
 const rootReducer = combineReducers({
   cart: cartReducer,
-  categories: categoriesReducer,
 });
 
 //Persist redux
